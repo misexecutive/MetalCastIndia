@@ -141,9 +141,6 @@ async function apiPOST(body){
     headers: { 'Content-Type':'application/json' },
     body: JSON.stringify(body)
   });
-  const j = await res.json();
-  if (j.status !== 'success') throw new Error(j.message || 'API error');
-  return j.data;
 }
 
 /* ---------- Loaders ---------- */
