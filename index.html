@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Attendance & Overtime Portal</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <header class="container">
+    <div class="header-bar">
+      <div>
+        <h1>Attendance & Overtime Portal</h1>
+        <p class="subtle">Timezone: Asia/Kolkata (IST) • <span id="serverTime">--</span></p>
+      </div>
+      <div class="month-controls">
+        <button id="btnPrev" class="btn ghost" aria-label="Previous Month">◀</button>
+        <input type="month" id="monthPicker" />
+        <button id="btnNext" class="btn ghost" aria-label="Next Month">▶</button>
+        <button id="btnRefresh" class="btn">Refresh</button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="employee-search">
+        <input type="text" id="employeeSearch" placeholder="Search Employee..." />
+      </div>
+      <div>
+        <select id="employeeSelect"></select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="mark">Mark Attendance</button>
+      <button class="tab" data-tab="overview">Overview & Salary</button>
+      <button class="tab" data-tab="historical">Historical</button>
+      <button class="tab" data-tab="config">Config</button>
+    </div>
+
+    <!-- Tab: Mark Attendance -->
+    <section id="tab-mark" class="tab-panel active">
+      <div class="grid-two">
+        <aside class="card">
+          <h3 class="card-title">Active Employees</h3>
+          <ul id="employeeList" class="list"></ul>
+        </aside>
+
+        <section class="card">
+          <div class="flex-between">
+            <h3 class="card-title">Mark for <span id="selectedEmpName">—</span> (<span id="selectedEmpId">—</span>)</h3>
+            <small id="workWindow">Work Hours: —</small>
+          </div>
+          <div id="attendanceTableWrap" class="table-wrap">
+            <!-- dynamic table here -->
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Tab: Overview & Salary -->
+    <section id="tab-overview" class="tab-panel">
+      <div class="grid-two">
+        <section class="card">
+          <h3 class="card-title">Daily Details</h3>
+          <div id="overviewTableWrap" class="table-wrap"></div>
+        </section>
+        <aside class="card">
+          <h3 class="card-title">Salary Summary</h3>
+          <div id="salaryCard" class="salary-card">
+            <!-- dynamic -->
+          </div>
+          <button id="btnGenerateLedger" class="btn primary mt">Generate Month Ledger</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Tab: Historical -->
+    <section id="tab-historical" class="tab-panel">
+      <div class="grid-two">
+        <section class="card">
+          <div class="flex-gap">
+            <input type="month" id="histMonth" />
+            <select id="histEmployee"></select>
+            <button id="btnHistLoad" class="btn">Load</button>
+          </div>
+          <div id="histTableWrap" class="table-wrap mt"></div>
+        </section>
+        <aside class="card">
+          <h3 class="card-title">Salary (Historical)</h3>
+          <div id="histSalaryWrap"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Tab: Config (read-only hint) -->
+    <section id="tab-config" class="tab-panel">
+      <section class="card">
+        <h3 class="card-title">Configuration (Read-only)</h3>
+        <p>Config Google Sheet me editable hai. Is UI me sirf view. (Sheet: <strong>Configuration</strong>)</p>
+        <div id="configTableWrap" class="table-wrap"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Toasts -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="loader" class="loader hidden" aria-hidden="true">Loading…</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
