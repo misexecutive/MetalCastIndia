@@ -138,6 +138,7 @@ async function apiGET(params){
 async function apiPOST(body){
   const res = await fetch(API_BASE, {
     method:'POST',
+    mode:'no-cors',
     headers: { 'Content-Type':'application/json' },
     body: JSON.stringify(body)
   });
